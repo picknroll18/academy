@@ -11,13 +11,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class MainMenu {
 
-	/*
-	 	update MainMenu
-	 	set id = ?
-	 		title = ?
-	 		url = ?
-	 		academyId = ?
-	 * */
 	@Id
 	@GeneratedValue (
 		strategy=GenerationType.AUTO
@@ -31,7 +24,7 @@ public class MainMenu {
 	private String title;
 	private String url;
 	@Column(updatable=false)	//update할때 넣지 않아도 되는 값으로 설정
-	private int academyId;
+	private String academyId;
 	@Column(updatable=false)	//update할때 넣지 않아도 되는 값으로 설정
 	private Integer parentId; //null이 들어갈수 있는 entity는 문자열이 들어갈 수 있는 정수형으로 바꿔줘야한다.
 	@Column(insertable=false, name="[order]")
@@ -48,13 +41,13 @@ public class MainMenu {
 		this.url = url;
 	}
 	
-	public MainMenu(String title, String url, int academyId) {
+	public MainMenu(String title, String url, String academyId) {
 		this.title = title;
 		this.url = url;
 		this.academyId = academyId;
 	}
 
-	public MainMenu(int id, String title, String url, int academyId, Integer parentId, int order) {
+	public MainMenu(int id, String title, String url, String academyId, Integer parentId, int order) {
 		this.id = id;
 		this.title = title;
 		this.url = url;
@@ -87,11 +80,11 @@ public class MainMenu {
 		this.url = url;
 	}
 
-	public int getAcademyId() {
+	public String getAcademyId() {
 		return academyId;
 	}
 
-	public void setAcademyId(int academyId) {
+	public void setAcademyId(String academyId) {
 		this.academyId = academyId;
 	}
 

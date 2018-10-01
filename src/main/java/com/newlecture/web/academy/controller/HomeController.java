@@ -1,11 +1,9 @@
 package com.newlecture.web.academy.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -15,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.newlecture.web.academy.dao.AcademyDao;
 import com.newlecture.web.academy.dao.MainMenuDao;
+import com.newlecture.web.academy.entity.Academy;
 import com.newlecture.web.academy.entity.MainMenu;
 
 @Controller("academyController")
@@ -30,15 +31,33 @@ public class HomeController {
 	@Autowired
 	private MainMenuDao mainMenuDao;
 	
-	@GetMapping("index")
-	public String index(Model model) {
+	@Autowired
+	private AcademyDao academyDao;
+	
+	// /academy/{id}  id를 파라미터화 한다.
+	@GetMapping("{id}")
+	public String index(@PathVariable("id") String id, Model model) {
+		// @PathVariable("id") String id   {id}와 매칭되어야 한다.
 		
-		List<MainMenu> mainMenus = mainMenuDao.getList();
+		Academy academy = academyDao.get(id);
+		
+		List<MainMenu> mainMenus = mainMenuDao.getListByAcademyId(id);
+		
+		academy.setMainMenus(mainMenus);
+		
+/*		List<MainMenu> mainMenus = mainMenuDao.getList();
 
-		model.addAttribute("mainMenus", mainMenus);
+		model.addAttribute("mainMenus", mainMenus);*/
 		
 		return "home.index";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@PostMapping("upload-ajax")
 	@ResponseBody //view단이 필요 없는, javascript가 바로 찾을 수 있다
