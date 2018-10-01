@@ -98,8 +98,16 @@ public class HbMainMenuDao implements MainMenuDao {
 		return result;
 	}
 
-	
-
-	
+	@Override
+	public List<MainMenu> getListByAcademyId(String id) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from MainMenu";
+		List<MainMenu> list = session
+							.createQuery(hql, MainMenu.class)	//SQL이 아니라 HQL이다. 주의!!
+							.getResultList();
+		
+		return list;
+	}
 
 }

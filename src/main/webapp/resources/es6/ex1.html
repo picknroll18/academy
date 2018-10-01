@@ -1,12 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="menu-app"><!-- 이름 여기에 지정 -->
 <head>
 <meta charset="UTF-8">
 <title>ex1 test</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js "></script>
 <script src="ex1.js">
 </script>
 </head>
 <body>
-
+	<section ng-controller="menu-controller">
+		<h1>메뉴 목록 - {{title}}</h1>
+		<ul>
+			<li>
+				<input type="checkbox" name="menu-id" value="" /><span></span>
+				<input type="submit" name="action" value="수정" />
+				<input type="submit" name="action" value="삭제" />
+			</li>
+		</ul>
+		<fieldset>
+			<legend>메뉴 입력 필드</legend>
+			<div>
+				<label>이름: </label>
+				<input ng-model="title" name="title"/>
+			</div>
+			<div>
+				<label>url: </label>
+				<input ng-model="title" name="url"/>
+			</div>
+		</fieldset>
+		<div>
+			<input type="hidden" name="selected-menu-id" class="selected-menu-id"/>
+			<input type="submit" name="action" value="일괄삭제" />
+			<input type="submit" name="action" value="저장" />
+			<input type="submit" name="action" value="추가" />
+		</div>
+	</section>
 </body>
 </html>

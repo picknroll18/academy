@@ -54,7 +54,7 @@ public class ViewController {
 		
 //		for(String id : menuIds)
 //			System.out.println(id);
-		mainMenu.setAcademyId(1); //임의(1)로 설정, db에서 id 값을 자동증가하도록 설정하면 된다.
+		mainMenu.setAcademyId("1"); //임의(1)로 설정, db에서 id 값을 자동증가하도록 설정하면 된다.
 		switch(action) {
 		case "일괄삭제":
 			service.deleteMainMenuList(menuIds);
